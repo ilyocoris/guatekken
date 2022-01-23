@@ -1,4 +1,4 @@
-# PROVISIONAL_NAME
+# SOUL ARENA (provisional name)
 
 We want to build a 2d browser fighting game featuring unique 3D printed controllers for each character. The controllers will be powered by Arduino and connected by WiFi (or BLE) to the game. By using the vast amount of sensors available, each controller will play out in different and unique ways, pushing the asymmetry that makes fighting games so deep and brilliant to a maximum. 
 
