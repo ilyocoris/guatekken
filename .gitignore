@@ -1,5 +1,7 @@
 # gimp files
 *.xcf
+# vscode
+.vscode
 
 # Logs
 logs
