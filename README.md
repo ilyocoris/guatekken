@@ -30,7 +30,7 @@ Finally, we pretend to use the screen for an ultimate, that, when triggered for 
 
 As of the making of this exposition, we have not yet decided on an architecture for the vydeogame itself. We will first test different communication protocols between the controllers and the game, but BLE or WiFi with websockets seem like the candidate protocols that will be able to handle the real-time communication we will need. We have also to decide wether to have the game run in the browser or to use a remote server. Here are some of the architectures we have in mind for now.
 
-![alt text](concept/architectures_diagram.png)
+![alt text](concept/architecture_diagram.png)
 
 This project goes for a less traditional approach of IoT, as the peripherials will be the ones controlling the central device, not just passively providing data or being controlled, hence we will use the Arduino Cloud with a different approach than usual. When developing, we need to really understand the ranges and behaviours of different sensors, which we will do by building a dashboard for each controller to view the different variables live. For example, for the Òpla Kid controller, we would create a dashboard with the 5 buttons and the humidity sensor, and use it to calibrate the in-game fog with the humidity gradient that we determine empirically.
 
