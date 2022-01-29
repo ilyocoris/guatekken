@@ -1,0 +1,49 @@
+Controller 
+
+> poll_for_action() -> returns action
+> initialize
+
+Keyboard
+
+> initialize -> bind event listeners (window?)
+
+> handleKeyDown
+> handleKeyUp
+> > updateAction (upon keypress?)
+
+BLE
+
+> initialize -> establsih connection
+> updateAction (read from BLE, upon BLE change)
+
+Player
+	(TypeOf)Controller
+	Character
+> constructor:
+	controller.initialize()
+	character.initialize()
+> update:
+	controller.poll_for_action()
+	character.update()
+
+Character/Object (?)
+
+> initialize
+> > load_spritesheet
+> update(controller_action) -> this could be an event on a bus!!
+> > update_physics (basically gravity & inertia, rewritable on child classes)
+
+Action
+
+> update
+> getSprite
+
+currentAction {
+	action : jab
+	startedAt: time
+	currentFrame: 2
+	totalFrames: 30
+	isBlocking: true
+}
+
+jump move jab kick
