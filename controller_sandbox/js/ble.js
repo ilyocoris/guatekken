@@ -1,6 +1,4 @@
 // https://www.hackster.io/8bitkick/sensor-data-streaming-with-arduino-683a6c
-console.log("hello")
-
 const connectButton = document.getElementById('connectButton');
 const controllerServiceUUID = "19b10000-e8f2-537e-4f6c-d104768a1214";
 const baseCharacteristicUUID = "19b10001-e8f2-537e-4f6c-d104768a1214";
@@ -30,7 +28,7 @@ function connect()
                            acceptAllDevices : 1,
                            optionalServices : [ controllerServiceUUID ]
                        })
-        .then(function(device) {
+        .then((device) => {
             controller = device;
             console.log(controller)
             console.log('Connecting to GATT server...');

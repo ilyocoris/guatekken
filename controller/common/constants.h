@@ -1,7 +1,7 @@
 
 // BASE KIT CHARACTERISTIC
-// controles where charactear faces
 // 0-idle | 1-left | 2-right
+enum direction = {idle, left, right};
 const uint8_t MOVE = 0;
 const uint8_t JUMP = 1;
 const uint8_t DODGE = 2;

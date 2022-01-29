@@ -18,10 +18,11 @@ void update()
 
     if (humidity > humidity_reading)
     {
-        make_move = 2; // right
+        make_move = direction.right;
     }
     else
     {
-        make_move = 1; // idle
+        make_move = direction.left;
     }
+    humidity = humidity_reading;
 }
