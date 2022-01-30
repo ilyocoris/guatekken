@@ -1,4 +1,5 @@
 // https://www.hackster.io/8bitkick/sensor-data-streaming-with-arduino-683a6c
+// https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed-async-await.html
 const connectButton = document.getElementById('connectButton');
 const controllerServiceUUID = "19b10000-e8f2-537e-4f6c-d104768a1214";
 const baseCharacteristicUUID = "19b10001-e8f2-537e-4f6c-d104768a1214";
@@ -61,5 +62,11 @@ function connect()
 
 function handleData(event)
 {
-    console.log(event);
+    let base_actions = {
+        "move" : event.target.value.getUint8(0),
+        "jump" : event.target.value.getUint8(1),
+        "dodge" : event.target.value.getUint8(2),
+        "basic_attack" : event.target.value.getUint8(3)
+    };
+    console.log(base_actions);
 }
