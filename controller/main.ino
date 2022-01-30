@@ -25,7 +25,7 @@ void setup()
             ;
     }
     // character-controller initialization
-    initialize_sensors();
+    initialize_character();
     // BLE initialization
     create_and_advertise_ble_service();
 }
@@ -34,7 +34,7 @@ void loop()
 {
     BLEDevice central = BLE.central();
     // character-controller update
-    update();
+    update_character();
     // push update to ble
     update_base_characteristic();
     //

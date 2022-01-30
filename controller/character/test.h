@@ -3,13 +3,13 @@
 const char *controller_name = "Test Character Controller";
 float humidity = 0;
 
-bool initialize_sensors()
+bool initialize_character()
 {
     HTS221_initialize();
     return true;
 }
 
-void update()
+void update_character()
 {
     // behaviour:
     // humidity decreasing -> face_left
