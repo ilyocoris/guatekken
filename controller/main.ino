@@ -6,7 +6,8 @@
 // UNIVERSAL DEFINITIONS
 #include "common/constants.h"
 // SENSOR MODULES
-#include "modules/HTS221.h" // temperature and humidity
+#include "modules/HTS221.h"  // temperature and humidity
+#include "modules/LSM9DS1.h" // gyro & accel
 // CHARACTER
 #include "character/test.h"
 //#include "character/opla_kid.h"
@@ -28,22 +29,22 @@ void setup()
     initialize_character();
     // BLE initialization
     create_and_advertise_ble_service();
+    BLEDevice central = BLE.central();
 }
 
 void loop()
 {
-    BLEDevice central = BLE.central();
-    // character-controller update
-    update_character();
-    // push update to ble
-    update_base_characteristic();
     //
     if (central && central.connected())
     {
+        // character-controller update
+        update_character();
+        // push update to ble
+        update_base_characteristic();
         Serial.print("Connected to central: ");
         // print the central's MAC address:
         Serial.println(central.address());
     }
-    Serial.println(make_move);
+    // Serial.println(make_move);
     delay(1);
 }

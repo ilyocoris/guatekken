@@ -26,3 +26,12 @@ uint8_t make_jump = 0;
 uint8_t make_dodge = 0;
 uint8_t make_basic_attack = 0;
 //
+
+// SENSORS VARIABLES
+// HTS221
+float humidity;
+float temperature;
+// LSM9DS1
+float gyroscope_x;
+float gyroscope_y;
+float gyroscope_z;

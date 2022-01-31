@@ -1,6 +1,6 @@
 #include <Arduino_HTS221.h>
 
-void HTS221_initialize()
+void initialize_HTS221()
 {
     if (!HTS.begin())
     {
@@ -9,12 +9,24 @@ void HTS221_initialize()
     }
 }
 
-float HTS221_read_temperature()
+float HTS221_read_temperature(float &temperature)
 {
-    return HTS.readTemperature();
+    temperature = HTS.readHumidity();
 }
 
-float HTS221_read_humidity()
+void HTS221_serial_print_temperature()
 {
-    return HTS.readHumidity();
+    Serial.print("Temperature: ");
+    Serial.println(HTS.readTemperature());
+}
+
+void HTS221_serial_print_humidity()
+{
+    Serial.print("Humidity: ");
+    Serial.println(HTS.readHumidity());
+}
+
+void HTS221_read_humidity(float &humidity)
+{
+    humidity = HTS.readHumidity();
 }

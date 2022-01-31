@@ -24,7 +24,7 @@ void update_base_characteristic()
     }
     else
     {
-        digitalWrite(LEDR, LOW);
+        digitalWrite(LED_BUILTIN, LOW);
     }
 }
 
