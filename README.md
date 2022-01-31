@@ -44,7 +44,7 @@ Bernat - Head of Manufacturing at 3D printing Startup.
 
 Domènec - Thinker and Game Designer.
 
-Dídac - ML Engineer. Programming.
+Dídac - Data Engineer.
 
 Aina - Programming & electronics.
 
