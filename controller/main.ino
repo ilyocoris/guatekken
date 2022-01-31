@@ -3,6 +3,7 @@
 
 // https://store.arduino.cc/products/arduino-mkr-iot-carrier
 
+#include <ArduinoBLE.h>
 // UNIVERSAL DEFINITIONS
 #include "common/constants.h"
 // SENSOR MODULES
@@ -26,7 +27,7 @@ void setup()
             ;
     }
     // character-controller initialization
-    initialize_character();
+    initialize_sensors();
     // BLE initialization
     create_and_advertise_ble_service();
     BLEDevice central = BLE.central();
@@ -37,14 +38,15 @@ void loop()
     //
     if (central && central.connected())
     {
-        // character-controller update
-        update_character();
+        // perform readings
+        update_readings();
+        //
+        write_characteristics();
         // push update to ble
-        update_base_characteristic();
+        // update_base_characteristic();
         Serial.print("Connected to central: ");
         // print the central's MAC address:
         Serial.println(central.address());
     }
     // Serial.println(make_move);
-    delay(1);
 }

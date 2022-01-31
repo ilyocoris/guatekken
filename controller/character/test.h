@@ -2,14 +2,14 @@
 // Model functions for populating a controller with a character
 const char *controller_name = "Test Character Controller";
 
-bool initialize_character()
+bool initialize_sensors()
 {
-    initialize_HTS221();
-    initialize_LSM9DS1();
+    HTS221_initialize();
+    LSM9DS1_initialize();
     return true;
 }
 
-void update_character()
+void update_readings()
 {
     // behaviour:
     // humidity decreasing -> face_left
@@ -31,4 +31,8 @@ void update_character()
     //     make_move = LEFT;
     // }
     // humidity = humidity_reading;
+}
+
+void write_characteristics()
+{
 }

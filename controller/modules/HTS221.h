@@ -1,6 +1,8 @@
 #include <Arduino_HTS221.h>
 
-void initialize_HTS221()
+// Bluetooth Characteristic UUID
+
+void HTS221_initialize()
 {
     if (!HTS.begin())
     {
