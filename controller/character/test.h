@@ -2,37 +2,33 @@
 // Model functions for populating a controller with a character
 const char *controller_name = "Test Character Controller";
 
+// GYROSCOPE
+// Characteristic
+BLECharacteristic LSM9DS1_gyroscope_characteristic(LSM9DS1_gyroscope_characteristic_uuid, BLERead | BLENotify, 12, /*fixedLength*/ true);
+// Object
+LSM9DS1_Gyroscope gyroscope(LSM9DS1_gyroscope_characteristic, "Gyroscope");
+
 bool initialize_sensors()
 {
-    HTS221_initialize();
-    LSM9DS1_initialize();
+    // HTS221_initialize();
+
+    gyroscope.initialize();
     return true;
 }
 
 void update_readings()
 {
-    // behaviour:
-    // humidity decreasing -> face_left
-    // humidity increasing -> face_right
-    // LSM9DS1_read_gyroscope(gyroscope_x, gyroscope_y, gyroscope_z);
-    LSM9DS1_serial_print_gyroscope();
-    LSM9DS1_serial_print_gyroscope_sample_rate();
-    // HTS221_serial_print_temperature();
-    // HTS221_serial_print_humidity();
-    // HTS221_read_humidity(humidity);
-    //  float humidity_reading = HTS221_read_humidity();
-
-    // if (humidity > humidity_reading)
-    // {
-    //     make_move = RIGHT;
-    // }
-    // else
-    // {
-    //     make_move = LEFT;
-    // }
-    // humidity = humidity_reading;
+    gyroscope.update_readings();
+    // gyroscope.serial_print();
+    // gyroscope.serial_print_sample_rate();
 }
 
-void write_characteristics()
+void push_characteristics()
 {
+    gyroscope.push_characteristic();
+}
+
+void add_characteristics_to_service(BLEService &service)
+{
+    service.addCharacteristic(gyroscope.characteristic);
 }

@@ -32,6 +32,6 @@ uint8_t make_basic_attack = 0;
 float humidity;
 float temperature;
 // LSM9DS1
-float gyroscope_x;
-float gyroscope_y;
-float gyroscope_z;
+// float gyroscope_x;
+// float gyroscope_y;
+// float gyroscope_z;

@@ -62,11 +62,5 @@ function connect()
 
 function handleData(event)
 {
-    let base_actions = {
-        "move" : event.target.value.getUint8(0),
-        "jump" : event.target.value.getUint8(1),
-        "dodge" : event.target.value.getUint8(2),
-        "basic_attack" : event.target.value.getUint8(3)
-    };
-    console.log(base_actions);
+    console.log(event);
 }
