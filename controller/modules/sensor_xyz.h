@@ -25,6 +25,7 @@ private:
     virtual void read_sensor(float &x, float &y, float &z){};
     void push_new_reading(Axis &axis, float new_reading);
     void update_average(Axis &axis);
+    // bool update_characteristic = false;
 
 public:
     // const char characteristic_uuid;
@@ -46,8 +47,12 @@ SensorXYZ::SensorXYZ(BLECharacteristic &characteristic, const char *sensor_name)
 
 void SensorXYZ::push_characteristic()
 {
+    // if (update_characteristic)
+    // {
     update_characteristic_buffer();
     write_characteristic();
+    // update_characteristic = false;
+    // }
     // for (int i = 0; i < 12; ++i)
     // {
     //     Serial.print(characteristic_buffer[i]);
@@ -96,8 +101,14 @@ void SensorXYZ::update_average(Axis &axis)
     {
         sum = sum + axis.readings[i];
     }
+    float average = sum / length;
     axis.past_avg = axis.current_avg;
-    axis.current_avg = sum / length;
+    // only update characteristic if significant change on one of the axis
+    // if (abs(average - axis.current_avg) > 1)
+    // {
+    //     update_characteristic = true;
+    // }
+    axis.current_avg = average;
 }
 
 void SensorXYZ::update_readings()

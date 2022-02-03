@@ -2,7 +2,7 @@
 // https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed-async-await.html
 const connectButton = document.getElementById('connectButton');
 const controllerServiceUUID = "19b10000-e8f2-537e-4f6c-d104768a1214";
-const baseCharacteristicUUID = "19b10001-e8f2-537e-4f6c-d104768a1214";
+const gyroscopeCharacteristicUUID = "19b10001-e8f2-537e-4f6c-d104768a1214";
 var controller;
 
 if ("bluetooth" in navigator)
@@ -31,13 +31,13 @@ function connect()
                        })
         .then((device) => {
             controller = device;
-            console.log(controller)
+            // console.log(controller)
             console.log('Connecting to GATT server...');
             return device.gatt.connect();
         })
         .then(function(server) {
             console.log('Getting service...');
-            console.log(server);
+            // console.log(server);
             return server.getPrimaryService(controllerServiceUUID);
         })
         .then(function(service) {
@@ -49,7 +49,12 @@ function connect()
             console.log('Subscribing...');
             for (c in characteristics)
             {
-                characteristics[c].addEventListener('characteristicvaluechanged', handleData);
+                if (characteristics
+                        [c].uuid == gyroscopeCharacteristicUUID)
+                    characteristics[c].addEventListener('characteristicvaluechanged', handleGyroscope);
+                else
+                    characteristics[c].addEventListener('characteristicvaluechanged', handleData);
+
                 characteristics[c].startNotifications();
             }
             console.log("Connected!")
@@ -62,5 +67,28 @@ function connect()
 
 function handleData(event)
 {
+    // unclassified characteristic
     console.log(event);
+}
+
+function get_xyz(event)
+{
+    return {
+        // true = byte order from Arduino is littleEndian
+        "x" : Math.round(event.target.value.getFloat32(0, true)),
+        "y" : Math.round(event.target.value.getFloat32(4, true)),
+        "z" :
+            Math.round(event.target.value.getFloat32(8, true)),
+    };
+}
+
+function handleGyroscope(event)
+{
+    // for gyrposcope characteristic
+    // get the xyz data  from the peripheral:
+    console.log(get_xyz(event))
+    // console.log({
+    //     "sensor" : "gyroscope",
+    //     "data" : get_xyz(event)
+    // });
 }
