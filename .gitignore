@@ -2,6 +2,14 @@
 *.xcf
 # vscode
 .vscode
+/ble_gateway/game/
+
+# phaser
+game/.cache
+game/dist
+game/node_modules
+game/package-lock.json
+game/.DS_Store
 
 #This .gitignore file should be placed at the root of your Unity project directory
 #

@@ -1,6 +1,6 @@
 // TEST CHARACTER
 // Model functions for populating a controller with a character
-const char *controller_name = "Test Character Controller";
+const char *controller_name = "TestController";
 
 // GYROSCOPE
 // Characteristic
