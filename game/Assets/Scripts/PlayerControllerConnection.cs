@@ -15,14 +15,19 @@ public class PlayerControllerConnection : MonoBehaviour
 
     }
 
-    void EstablishConnection(){
+    void EstablishConnection(string ControllerId){
         Debug.Log("Establish Connection.");
         // Adds TestCharacterScript to Player
-        this.gameObject.AddComponent<TestCharacterScript>();
+        if(ControllerId == "TestController"){
+            this.gameObject.AddComponent<TestCharacterScript>();
+        }
+        
         // Add component script to the player object for the character that the controller represents.
     }
 
-    void UpdateGyroscope(){
-        Debug.Log("UpdateGyroscope.");
+    void UpdateGyroscope(string GyroscopeDPS){
+        Debug.Log("Gyroscope update:");
+        Debug.Log(GyroscopeDPS);
+        var gyroscopeUpdateDPS = JsonUtility.FromJson<Vector3>(GyroscopeDPS);
     }
 }

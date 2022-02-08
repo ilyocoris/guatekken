@@ -3,6 +3,7 @@
 # vscode
 .vscode
 /ble_gateway/game/
+game_build/
 
 # phaser
 game/.cache
