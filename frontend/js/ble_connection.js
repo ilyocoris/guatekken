@@ -46,7 +46,7 @@ function connect(unityInstance) {
                 [c].uuid == "19b10001-e8f2-537e-4f6c-d104768a1214") {
                     characteristics[c].addEventListener('characteristicvaluechanged', (event) => {
                         xyz_json = get_xyz(event);
-                        unityInstance.SendMessage('Player1', 'UpdateGyroscope', JSON.stringify(xyz_json));
+                        unityInstance.SendMessage('Player1', 'UpdateCharacterFromGyroscope', JSON.stringify(xyz_json));
                     });
                     characteristics[c].startNotifications();
                 }

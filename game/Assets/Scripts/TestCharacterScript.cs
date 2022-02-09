@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class TestCharacterScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    PlayerState state;
+
+    public void CharacterInitialization()
     {
-        
+        state = GetComponent<PlayerState>();
     }
 
     // Update is called once per frame
-    void Update()
+    void UpdateCharacterFromGyroscope(string GyroscopeDPS)
     {
-        transform.position = transform.position + new Vector3(0.01f,0,0); 
+        // transform.position = transform.position + new Vector3(0.01f,0,0); 
+        Debug.Log("Gyroscope update:");
+        Debug.Log(GyroscopeDPS);
+        var gyroscopeUpdateDPS = JsonUtility.FromJson<Vector3>(GyroscopeDPS);
+        state.move = new Vector2(gyroscopeUpdateDPS[0],state.move.y);
     }
 }

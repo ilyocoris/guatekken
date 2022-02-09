@@ -5,22 +5,14 @@ using UnityEngine;
 
 public class PlayerControllerConnection : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    void Update(){
-
-    }
-
     void EstablishConnection(string ControllerId){
         Debug.Log("Establish Connection.");
         // Adds TestCharacterScript to Player
         if(ControllerId == "TestController"){
-            this.gameObject.AddComponent<TestCharacterScript>();
+            TestCharacterScript character_script = this.gameObject.AddComponent<TestCharacterScript>();
+            character_script.CharacterInitialization();
         }
+
         
         // Add component script to the player object for the character that the controller represents.
     }
