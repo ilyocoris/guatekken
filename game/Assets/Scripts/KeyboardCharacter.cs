@@ -9,6 +9,7 @@ using UnityEngine;
 public class KeyboardCharacter : MonoBehaviour
 {
     PlayerState state;
+    Animator animator;
     // public float speed = 200;
     // Vector2 move;
     // Rigidbody2D rigid_body;
@@ -31,5 +32,9 @@ public class KeyboardCharacter : MonoBehaviour
     void Update()
     {
         state.move = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+        if (Input.GetKeyDown(KeyCode.Space))
+        { 
+            state.jump = true;
+        }
     }
 }

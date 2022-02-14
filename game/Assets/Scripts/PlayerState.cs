@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     public Vector2 move;
+    public bool jump;
     // Start is called before the first frame update
     void Start()
     {
