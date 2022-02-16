@@ -6,16 +6,17 @@ var controllers = {
     }
 };
 
-function get_xyz(event) {
+function get_xyz(event, playerId) {
     return {
         // true = byte order from Arduino is littleEndian
         "x": event.target.value.getFloat32(0, true),
         "y": event.target.value.getFloat32(4, true),
         "z": event.target.value.getFloat32(8, true),
+        "playerId": playerId
     };
 }
 
-function connect(unityInstance) {
+function connect(unityInstance, playerId = "Player1") {
     console.log("Connecting...")
     if ("bluetooth" in navigator) {
         navigator.bluetooth.requestDevice({
@@ -28,7 +29,14 @@ function connect(unityInstance) {
             console.log('Getting service...');
             // console.log(server);
             var deviceName = server.device.name;
-            unityInstance.SendMessage('Player1', 'EstablishConnection', deviceName);
+            var stringifiedJsonInfo = JSON.stringify(
+                { "controllerId": deviceName, "playerId": playerId })
+            console.log(stringifiedJsonInfo);
+            unityInstance.SendMessage(
+                'ControllerGateway', // gameobject
+                'ControllerConnection', // method
+                stringifiedJsonInfo // argument 
+            );
             return server.getPrimaryService(controllers[deviceName]["serviceUUID"]);
         }
         ).then((service) => {
@@ -42,11 +50,10 @@ function connect(unityInstance) {
             for (c in characteristics) {
                 console.log(characteristics
                 [c].uuid);
-                if (characteristics
-                [c].uuid == "19b10001-e8f2-537e-4f6c-d104768a1214") {
+                if (characteristics[c].uuid == "19b10001-e8f2-537e-4f6c-d104768a1214") {
                     characteristics[c].addEventListener('characteristicvaluechanged', (event) => {
-                        xyz_json = get_xyz(event);
-                        unityInstance.SendMessage('Player1', 'UpdateCharacterFromGyroscope', JSON.stringify(xyz_json));
+                        xyz_json = get_xyz(event, playerId);
+                        unityInstance.SendMessage('ControllerGateway', 'UpdateGyroscope', JSON.stringify(xyz_json));
                     });
                     characteristics[c].startNotifications();
                 }

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <button id="connectButton">Connect</button>
+    <button id="connectButton">Connect Player 1</button>
     <div id="unity-container" class="unity-desktop">
         <canvas id="unity-canvas" width=960 height=600></canvas>
         <div id="unity-loading-bar">
@@ -106,8 +106,11 @@
                 // append
                 if ("bluetooth" in navigator) {
                     connectButton.addEventListener('click', (event, unityInstance) => {
+
                         connect(UnityInstance);
                     });
+                } else {
+                    alert("Bluetooth not enabled. Make sure you are using chrome and have enabled chrome://flags/#enable-web-bluetooth-new-permissions-backend")
                 }
             }).catch((message) => {
                 alert(message);
