@@ -2,22 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Player{
-    public Object Character;
-    public Vector2 startingPosition; 
-    public string controllerId; 
+public struct Player
+{
+    public Object Prefab;
+    public GameObject Character;
+    public Vector2 startingPosition;
+    public string controllerId;
     public string playerId;
+    public BLEState state;
 };
 
-public struct ControllerConnectionInfo{
+public struct ControllerConnectionInfo
+{
     public string controllerId;
     public string playerId;
 };
 
-public struct SensorXYZInfo{
-    float x;
-    float y;
-    float z;
+public struct SensorXYZInfo
+{
+    public float x;
+    public float y;
+    public float z;
     public string playerId;
 };
 
@@ -27,11 +32,13 @@ public class ControllerGateway : MonoBehaviour
     public Dictionary<string, Player> Players = new Dictionary<string, Player>();
     // Start is called before the first frame update
 
-    void Start(){
+    void Start()
+    {
         // ControllerConnection("{\"playerId\":\"Player1\",\"controllerId\":\"TestController\"}");
     }
 
-    void ControllerConnection(string jsConnectionInfo){
+    void ControllerConnection(string jsConnectionInfo)
+    {
         /* 
             Method called from javascript when the connection is established with teh controller.
             Input:
@@ -44,7 +51,8 @@ public class ControllerGateway : MonoBehaviour
         ControllerConnectionInfo connectionInfo = JsonUtility.FromJson<ControllerConnectionInfo>(jsConnectionInfo);
         // TODO: 
         string CharacterPrefabPath = "";
-        switch(connectionInfo.controllerId){
+        switch (connectionInfo.controllerId)
+        {
             case "TestController":
                 CharacterPrefabPath = "CharacterPrefabs/TSTCharacter";
                 break;
@@ -56,43 +64,49 @@ public class ControllerGateway : MonoBehaviour
         //     Players[connectionInfo.playerId].Character = Resources.Load("CharacterPrefabs/TSTCharacter");
         // }  
         Player newPlayer = new Player();
-        newPlayer.Character = Resources.Load(CharacterPrefabPath); 
+        newPlayer.Prefab = Resources.Load(CharacterPrefabPath);
         newPlayer.controllerId = connectionInfo.controllerId;
         newPlayer.playerId = connectionInfo.playerId;
         newPlayer.startingPosition = getPlayerStartingPosition(connectionInfo.playerId);
+        newPlayer.Character = Instantiate(newPlayer.Prefab, newPlayer.startingPosition, Quaternion.identity) as GameObject;
+        newPlayer.Character.AddComponent<BLEState>();
+        //newPlayer.state = newPlayer.Character.GetComponent<TSTState>;
         Players[connectionInfo.playerId] = newPlayer;
-        Instantiate(Players[connectionInfo.playerId].Character, Players[connectionInfo.playerId].startingPosition,Quaternion.identity);  
-        Debug.Log("Hello");   
+        Debug.Log("Hello");
     }
 
-    Vector2 getPlayerStartingPosition(string playerId){
+    Vector2 getPlayerStartingPosition(string playerId)
+    {
         /*
             Returns a default starting position for each player.
         */
         Vector2 startingPosition;
-        switch(playerId){
+        switch (playerId)
+        {
             case "Player1":
-                startingPosition = new Vector2(-3,0);
+                startingPosition = new Vector2(-3, 0);
                 break;
             case "Player2":
-                startingPosition = new Vector2(3,0);
+                startingPosition = new Vector2(3, 0);
                 break;
             default:
-                startingPosition = new Vector2(0,0);
+                startingPosition = new Vector2(0, 0);
                 break;
         }
         return startingPosition;
     }
 
-    void UpdateGyroscope(string GyroscopeInfo){
+    void UpdateGyroscope(string GyroscopeInfo)
+    {
         SensorXYZInfo gyroscopeUpdateInfo = JsonUtility.FromJson<SensorXYZInfo>(GyroscopeInfo);
-
+        Vector3 gyroscopeDPS = new Vector3(gyroscopeUpdateInfo.x, gyroscopeUpdateInfo.y, gyroscopeUpdateInfo.z);
+        BLEState state = Players[gyroscopeUpdateInfo.playerId].Character.GetComponent<BLEState>();
+        state.GyroscopeToState(gyroscopeDPS);
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

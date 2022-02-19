@@ -35,7 +35,6 @@ public class PlayerAnimator : MonoBehaviour
         // }
         //if(rigid_body.velocity.y == 0 & rigid_body.velocity.x != 0){
         if(Mathf.Abs(rigid_body.velocity.y) < 0.01f & rigid_body.velocity.x != 0){
-            Debug.Log("kek");
             ChangeAnimationState(animations.run);
         }else{
             ChangeAnimationState(animations.idle);

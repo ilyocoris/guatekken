@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1055134147}
   - component: {fileID: 1055134149}
   - component: {fileID: 1055134150}
-  - component: {fileID: 1055134151}
+  - component: {fileID: 8788629472795008308}
   m_Layer: 0
   m_Name: TSTCharacter
   m_TagString: Untagged
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc530c23c0de24dbeac65e91c19cf050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1055134151
+--- !u!114 &8788629472795008308
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,8 +174,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 724059710485371239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6adce628ab846d66a975466ded33ad84, type: 3}
+  m_Script: {fileID: 11500000, guid: 6827629bf58c7b7d6b44bd1834abadab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
-  jump: 0
+  angles: {x: 0, y: 0, z: 0}
+  dps: {x: 0, y: 0, z: 0}

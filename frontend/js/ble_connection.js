@@ -41,6 +41,7 @@ function connect(unityInstance, playerId = "Player1") {
         }
         ).then((service) => {
             // return { "deviceName": service.device.name, "characteristics": service.getCharacteristics() }
+            console.log("Getting characteristics...");
             return service.getCharacteristics();
         }
         ).then((characteristics) => {
