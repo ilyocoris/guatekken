@@ -56,6 +56,10 @@ public class BLEState : MonoBehaviour
         Debug.Log(gyroscope.angles);
 
     }
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 100), gyroscope.angles[0].ToString());
+    }
     public void GyroscopeToState(Vector3 gyroscopeDPS)
     {
         // store DPS

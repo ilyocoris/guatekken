@@ -60,11 +60,11 @@ public class TSTMovement : MonoBehaviour
             Logic for transforming BLE state to controller actions for character 
         */
 
-        if (state.gyroscope.angles.x > 30)
+        if (state.gyroscope.angles.x / 100 > 30)
         {
             controller.move.x = 1;
         }
-        else if (state.gyroscope.angles.x < -30)
+        else if (state.gyroscope.angles.x / 100 < -30)
         {
             controller.move.x = -1;
         }

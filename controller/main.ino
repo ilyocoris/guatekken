@@ -11,7 +11,7 @@
 //#include "modules/HTS221.h"  // temperature and humidity
 #include "modules/LSM9DS1.h" // gyro & accel
 // CHARACTER
-#include "character/test.h"
+#include "character/test_mkr.h"
 //#include "character/opla_kid.h"
 // BLUETOOTH
 #include "common/bluetooth.h"

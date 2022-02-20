@@ -118,7 +118,7 @@ void SensorXYZ::update_readings()
     push_new_reading(x, new_reading_x);
     push_new_reading(y, new_reading_y);
     push_new_reading(z, new_reading_z);
-    update_average(x);
-    update_average(y);
-    update_average(z);
+    // update_average(x);
+    // update_average(y);
+    // update_average(z);
 }
