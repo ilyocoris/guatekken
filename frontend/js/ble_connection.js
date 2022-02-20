@@ -53,7 +53,9 @@ function connect(unityInstance, playerId = "Player1") {
                 [c].uuid);
                 if (characteristics[c].uuid == "19b10001-e8f2-537e-4f6c-d104768a1214") {
                     characteristics[c].addEventListener('characteristicvaluechanged', (event) => {
+                        console.log("characteristicvaluechanged");
                         xyz_json = get_xyz(event, playerId);
+                        console.log(xyz_json);
                         unityInstance.SendMessage('ControllerGateway', 'UpdateGyroscope', JSON.stringify(xyz_json));
                     });
                     characteristics[c].startNotifications();

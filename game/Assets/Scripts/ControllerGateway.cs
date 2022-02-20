@@ -4,12 +4,10 @@ using UnityEngine;
 
 public struct Player
 {
-    public Object Prefab;
-    public GameObject Character;
     public Vector2 startingPosition;
     public string controllerId;
     public string playerId;
-    public BLEState state;
+    public BLEState characterBLEState;
 };
 
 public struct ControllerConnectionInfo
@@ -64,15 +62,13 @@ public class ControllerGateway : MonoBehaviour
         //     Players[connectionInfo.playerId].Character = Resources.Load("CharacterPrefabs/TSTCharacter");
         // }  
         Player newPlayer = new Player();
-        newPlayer.Prefab = Resources.Load(CharacterPrefabPath);
+        Object characterPrefab = Resources.Load(CharacterPrefabPath);
         newPlayer.controllerId = connectionInfo.controllerId;
         newPlayer.playerId = connectionInfo.playerId;
         newPlayer.startingPosition = getPlayerStartingPosition(connectionInfo.playerId);
-        newPlayer.Character = Instantiate(newPlayer.Prefab, newPlayer.startingPosition, Quaternion.identity) as GameObject;
-        newPlayer.Character.AddComponent<BLEState>();
+        newPlayer.characterBLEState = Instantiate(characterPrefab, newPlayer.startingPosition, Quaternion.identity) as BLEState;
         //newPlayer.state = newPlayer.Character.GetComponent<TSTState>;
         Players[connectionInfo.playerId] = newPlayer;
-        Debug.Log("Hello");
     }
 
     Vector2 getPlayerStartingPosition(string playerId)
@@ -98,15 +94,10 @@ public class ControllerGateway : MonoBehaviour
 
     void UpdateGyroscope(string GyroscopeInfo)
     {
+        Debug.Log("ControllerGateway.UpdateGyroscope");
         SensorXYZInfo gyroscopeUpdateInfo = JsonUtility.FromJson<SensorXYZInfo>(GyroscopeInfo);
         Vector3 gyroscopeDPS = new Vector3(gyroscopeUpdateInfo.x, gyroscopeUpdateInfo.y, gyroscopeUpdateInfo.z);
-        BLEState state = Players[gyroscopeUpdateInfo.playerId].Character.GetComponent<BLEState>();
-        state.GyroscopeToState(gyroscopeDPS);
+        Players[gyroscopeUpdateInfo.playerId].characterBLEState.GyroscopeToState(gyroscopeDPS);
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

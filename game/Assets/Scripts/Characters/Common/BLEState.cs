@@ -62,6 +62,7 @@ public class BLEState : MonoBehaviour
     }
     public void GyroscopeToState(Vector3 gyroscopeDPS)
     {
+        Debug.Log("BLEState.GyroscopeToState");
         // store DPS
         gyroscope.lastDps = gyroscope.dps;
         gyroscope.dps = gyroscopeDPS;
