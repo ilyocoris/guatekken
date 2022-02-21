@@ -2,7 +2,7 @@ https://www.gamedeveloper.com/design/the-absolute-basics-of-good-gyro-controls
 
 http://gyrowiki.jibbsmart.com/blog:good-gyro-controls-part-1:the-gyro-is-a-mouse?_sp=51451171-19a2-4c09-b321-179f6f1d8995.1645239352296
 
-[ ] Clean up character instantiation.
+[x] Clean up character instantiation.
 [ ] Figure out how to manage characteristid uuiids.
 [ ] General class for sensors. (dynamic arrays)
 [ ]

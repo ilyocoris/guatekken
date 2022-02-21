@@ -66,8 +66,10 @@ public class ControllerGateway : MonoBehaviour
         newPlayer.controllerId = connectionInfo.controllerId;
         newPlayer.playerId = connectionInfo.playerId;
         newPlayer.startingPosition = getPlayerStartingPosition(connectionInfo.playerId);
-        newPlayer.characterBLEState = Instantiate(characterPrefab, newPlayer.startingPosition, Quaternion.identity) as BLEState;
+        GameObject instantiatedCharacter = Instantiate(characterPrefab, newPlayer.startingPosition, Quaternion.identity) as GameObject;
+        //newPlayer.characterBLEState = Instantiate(characterPrefab, newPlayer.startingPosition, Quaternion.identity) as BLEState;
         //newPlayer.state = newPlayer.Character.GetComponent<TSTState>;
+        newPlayer.characterBLEState = instantiatedCharacter.GetComponent<BLEState>();
         Players[connectionInfo.playerId] = newPlayer;
     }
 
